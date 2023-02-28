@@ -22,6 +22,19 @@
                             </div>
                         @enderror
                         <div class="mb-3 mt-3">
+                       <select class="form-control"  name="type_id" id="type_id">
+                                @foreach ($types as $type)
+                                <option value="{{ $type->id }}">  {{ $type->name }}  </option>
+                                @error('type_id')
+                                    <div class="invalid-feedback">
+                                        <p><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</p>
+                                    </div>
+                                @enderror
+                                @endforeach
+                            </select> 
+                        </div>
+                         {{-- @dump($types, $project)  --}}
+                        <div class="mb-3 mt-3">
                             <label for="content" class="form-label d-block">Project Content</label>
                             <textarea name="content" id="" cols="140" class="  @error('content') is-invalid @enderror " rows="10">{{ old('content') ?? $project->content }} </textarea>
                             @error('content')

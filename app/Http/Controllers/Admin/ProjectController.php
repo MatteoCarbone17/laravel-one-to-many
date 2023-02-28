@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 //  Illuminate\Contracts\Validation\Rule ------>  da problemi con Rule::unique
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,8 @@ class ProjectController extends Controller
         // 'author'=> 'min:3|max:50',
         'content' => 'required|min:5|max:1600',
         'project_date_start' => 'required',
-        'image' => 'required|image'
+        'image' => 'required|image',
+        'type_id'=>'required|exists:types,id',
 
     ];
     protected $validateMessages = [
@@ -34,7 +36,8 @@ class ProjectController extends Controller
         'content.max' => 'Limite massimo 1660 caratteri',
         'project_date_start.required' => 'Data inizio obbligatoria',
         'image.require' => 'immagine necessaria',
-        'image.image' => 'Controlla che sia un immagine'
+        'image.image' => 'Controlla che sia un immagine',
+        'type_id.require'=>'Tipo progetto obbligatorio',
     ];
 
 
@@ -56,9 +59,10 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(project $project)
+    public function create()
     {
-        return view('admin.projects.create', compact('project'));
+        return view('admin.projects.create', ["project" => new Project(),'types'=>Type::all() ]);
+       
     }
 
     /**
@@ -73,7 +77,7 @@ class ProjectController extends Controller
         //  dd( $request->all());
         $data =  $request->all();
         $request->validate($this->validateRules, $this->validateMessages);
-
+        // dd($data);
         $data['author'] = Auth::user()->name;
         $data['slug'] = Str::slug($data['title']);
         $data['image'] = Storage::put('imgs/', $data['image']);
@@ -82,6 +86,8 @@ class ProjectController extends Controller
         $newProject->fill($data);
         $newProject->save();
         return redirect()->route('admin.projects.show', $newProject->id)->with('message', "Project \" $newProject->title \" has been Created")->with('classMessage', "-success");
+
+        
     }
 
     /**
@@ -107,7 +113,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', ["project" => $project,'types'=>Type::all() ]);
     }
 
     /**
