@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Project as Project;
+use App\Models\Type;
 use Faker\Generator as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,9 @@ class ProjectSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+
+        $types = Type::all();
+
         for ($i=0; $i < 50; $i++) { 
             $newProject = new Project();
             $newProject->title = $faker->unique()->realTextBetween(5,10);
