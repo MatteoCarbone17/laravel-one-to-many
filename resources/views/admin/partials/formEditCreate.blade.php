@@ -22,9 +22,9 @@
                             </div>
                         @enderror
                         <div class="mb-3 mt-3">
-                       <select class="form-control"  name="type_id" id="type_id">
+                       <select class="form-control @error('type_id') is-invalid @enderror "  name="type_id" id="type_id">
                                 @foreach ($types as $type)
-                                <option value="{{ $type->id }}">  {{ $type->name }}  </option>
+                                <option value="{{ $type->id }}" {{old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}  >  {{ $type->name }}  </option>
                                 @error('type_id')
                                     <div class="invalid-feedback">
                                         <p><i class="fa-solid fa-circle-exclamation"></i> {{ $message }}</p>

@@ -28,19 +28,30 @@
                         </p>
                     </div>
                     <div class="card-body  rounded-4 text-center">
-                      <h5 class="card-title mt-2 mb-2">{{ $project->title }}</h5>
+                        <div>
+                            <h5 class="card-title mt-2 mb-2">{{ $project->title }}</h5>
+                        </div>
                         <div class="card-img mt-2 mb-2">
                             <img src="{{ asset('storage/imgs/'. $project->image) }}" class="img-fluid" alt="">
                         </div>
-                        <p class="card-text p-3">{{ $project->content }}</p>
+                        <div>
+                            <p class="card-text p-3">{{ $project->content }}</p>
+                        </div>
                         <div class="card-footer  rounded-4 p-3">
-                            <span class="d-block">Data inizio : {{ $project->project_date_start }} </span>
-                            @if (isset($project->project_date_end))
-                                <p> Data fine: {{ $project->project_date_end }}</p>
-                            @else
-                                <p> Project working in progress </p>
-                            @endif
-                            <span> Slug: {{ $project->slug }} </span>
+                            <div>
+                                <p>
+                                   Project Type: {{ $project->type->name  }}
+                                </p>
+                            </div>
+                            <div>
+                                <span class="d-block">Data inizio : {{ $project->project_date_start }} </span>
+                                @if (isset($project->project_date_end))
+                                    <p> Data fine: {{ $project->project_date_end }}</p>
+                                @else
+                                    <p> Project working in progress </p>
+                                @endif
+                                <span> Slug: {{ $project->slug }} </span>
+                            </div>
                         </div>
                         <div class="col">
                             <div class="mt-3">
