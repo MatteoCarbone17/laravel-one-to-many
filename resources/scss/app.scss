@@ -1,0 +1,32 @@
+@import '~bootstrap/scss/bootstrap';
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+*{
+    font-family: 'Jost', sans-serif;
+    svg{
+        height: 70px;
+        width: 70px;
+    }
+}
+main{
+    margin-top: 3rem;
+}
+nav.navbar{
+    height: 85px;
+    font-size: 1.2rem;
+    
+ }
+// .nav-custom{
+//     line-height: 100%;
+//     .navbar-nav{
+//         line-height: 100%;
+//         .nav-item{
+//             line-height: 100%;
+//             .nav-link{
+//                line-height: 100%;
+//                border-bottom:2px solid blue;
+//                 a:hover{
+//                 }
+//             }
+//         }}
+//     }
