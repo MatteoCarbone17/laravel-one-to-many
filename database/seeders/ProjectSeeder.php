@@ -22,10 +22,9 @@ class ProjectSeeder extends Seeder
     public function run(Faker $faker)
     {
 
-        $types = Type::all();
-
         for ($i=0; $i < 50; $i++) { 
             $newProject = new Project();
+            $newProject->type_id = Type::inRandomOrder()->first()->id;
             $newProject->title = $faker->unique()->realTextBetween(5,10);
             $newProject->author =$faker->realTextBetween(3,10);
             $newProject->slug = Str::slug($newProject->title);
